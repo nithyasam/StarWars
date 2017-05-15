@@ -90,19 +90,24 @@ $(document).ready(function(){
 			$("#display").html("");
 		}
 	});
+	/*--When attack button clicked,you and the enemy 
+		chosen would fight--*/
 	$("#button-attack").on("click", function(){
 		var enemy_cap = parseInt(enemy.attr("cap"));
 		var enemy_hp = parseInt(enemy.attr("hp"));
 		var you_ap = parseInt(you.attr("ap"));
 		var you_hp = parseInt(you.attr("hp")); 
+		/*--Display the damage message--*/
 		$("#display").html("You attacked "+enemy.attr("name")+
 			" for "+ you.attr("ap")+ " damage.");
 		$("#display").append("<br><br>");
 		$("#display").append(enemy.attr("name")+" attacked you for "
 			+ enemy.attr("cap")+ " damage.");
+		/*--Decrement the health points of you and the defender--*/
 		you_hp -= enemy_cap;
 		enemy_hp -= you_ap;
 		you_ap += parseInt(you.attr("apBaseValue"));
+		/*--Updating the attribute values with the new calculated ones.--*/
 		you.attr("hp", you_hp);
 		enemy.attr("hp", enemy_hp);
 		you.attr("ap", you_ap);
