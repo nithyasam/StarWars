@@ -1,0 +1,44 @@
+*{
+	box-sizing: border-box;
+}
+body{
+	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+	color:orange;
+	line-height: 23px;
+	font-size: 24px;
+	background-image: url(../../assets/images/Star_Wars_RPG.jpg);
+}
+header{
+	background-color: #4aaaa5;
+	min-width: 250px;
+	height: auto;
+	padding: 30px;
+	color: white;
+	font-size: 50px;
+	text-align: center;
+	font-family: 'Georgia', Times, 'Times New Roman', serif;
+}
+h3{
+	background-color: white;
+	color: black;
+	text-align: center;
+}
+#yourCharacter button{
+	background-color: green; 
+}
+#enemiesAvailable button{
+	background-color: red; 
+}
+#defender button{
+	background-color: black; 
+}
+#button-attack{
+	background-color: red;
+	color: white;
+	width: 100%;
+}
+#button-restart{
+	background-color: blue;
+	color: white;
+	width: 100%;
+}
