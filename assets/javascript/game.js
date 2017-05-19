@@ -82,10 +82,13 @@ $(document).ready(function(){
 			$("#yourCharacter").append($("#button-1"));
 			you = $("#button-1");
 			player = false;
+			/*--player disabled once chosen as your character--*/
+			you.attr("disabled",true);
 			$("#enemiesAvailable").append($("#button-2, #button-3, #button-4"));
 		}
 		/*-- choosing the defender and enabling the attack button--*/
 		else if(defender){
+			console.log("player1 defender: "+ you);
 			$("#defender").html($("#button-1"));
 			enemy = $("#button-1");
 			defender = false;
@@ -100,6 +103,8 @@ $(document).ready(function(){
 			$("#yourCharacter").append($("#button-2"));
 			you = $("#button-2");
 			player = false;
+			/*--player disabled once chosen as your character--*/
+			you.attr("disabled",true);
 			$("#enemiesAvailable").append($("#button-1, #button-3, #button-4"));
 		}
 		/*-- choosing the defender and enabling the attack button--*/
@@ -118,6 +123,8 @@ $(document).ready(function(){
 			$("#yourCharacter").append($("#button-3"));
 			you = $("#button-3");
 			player = false;
+			/*--player disabled once chosen as your character--*/
+			you.attr("disabled",true);
 			$("#enemiesAvailable").append($("#button-1, #button-2, #button-4"));
 		}
 		/*-- choosing the defender and enabling the attack button--*/
@@ -136,6 +143,8 @@ $(document).ready(function(){
 			$("#yourCharacter").append($("#button-4"));
 			you = $("#button-4");
 			player = false;
+			/*--player disabled once chosen as your character--*/
+			you.attr("disabled",true);
 			$("#enemiesAvailable").append($("#button-1, #button-2, #button-3"));
 		}
 		/*-- choosing the defender and enabling the attack button--*/
@@ -160,6 +169,7 @@ $(document).ready(function(){
 		$("#button-restart").hide();
 		$("#button-attack").attr("disabled",true);
 		$("#yourCharacter").html("");
+		$("#enemiesAvailable").html("");
 		$("#defender").html("");
 		$("#display").html("");
 		/*--on-click events function called--*/
