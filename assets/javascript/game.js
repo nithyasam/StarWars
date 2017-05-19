@@ -4,21 +4,78 @@ $(document).ready(function(){
 	var you;
 	var enemy;
 	var enemy_count;
-	/*--Initialize function --*/
-	var callInitialize =function(){
-		player = true;
-		defender = true;
-		you="";
-		enemy = "";
-		enemy_count = 3;
-		$("#button-restart").hide();
-		$("#button-attack").attr("disabled",true);
-		$("#yourCharacter").html("");
-		$("#defender").html("");
-		$("#display").html("");
+	/*--Array of player objects --*/
+	var playerList = [{
+		"id": "button-1",
+		"apBaseValue": 10,
+		"name": "Obi-Wan",
+		"hp": 120,
+		"ap": 10,
+		"cap": 5,
+		"value": 1,
+		"imgsrc" : "assets/images/Obi-Wan.jpg",
+	},
+	{
+		"id": "button-2",
+		"apBaseValue": 15,
+		"name": "Luke Skywalker",
+		"hp": 100,
+		"ap": 15,
+		"cap": 5,
+		"value": 2,
+		"imgsrc" : "assets/images/lukeskywalker.jpg",
+	},
+	{
+		"id": "button-3",
+		"apBaseValue": 8,
+		"name": "Darth Sidious",
+		"hp": 150,
+		"ap": 8,
+		"cap": 10,
+		"value": 3,
+		"imgsrc" : "assets/images/darth-sidious.jpg",
+	},
+	{
+		"id": "button-4",
+		"apBaseValue": 5,
+		"name": "Darth Maul",
+		"hp": 180,
+		"ap": 5,
+		"cap": 20,
+		"value": 4,
+		"imgsrc" : "assets/images/Darth-Maul.jpg",
 	}
-	callInitialize();
-	$("#button-1").on("click", function(){
+	];
+	/*--Creating the players--*/
+	var createPlayers = function(){
+		var playerBtn = [];
+		var playerName =[];
+		var image = [];
+		var healthPoints = [];
+		for(var i=0;i<playerList.length; i++){
+			playerBtn[i] = $("<button>");
+			playerBtn[i].addClass("btn btn-primary");
+			playerBtn[i].attr('id',playerList[i].id);
+			playerBtn[i].attr('apBaseValue',playerList[i].apBaseValue);
+			playerBtn[i].attr('name',playerList[i].name);
+			playerBtn[i].attr('hp',playerList[i].hp);
+			playerBtn[i].attr('ap',playerList[i].ap);
+			playerBtn[i].attr('cap',playerList[i].cap);
+			playerBtn[i].attr('value',playerList[i].value);
+			playerName[i] = $("<h5>"+playerList[i].name+"</h5>");
+			image[i] = $("<img>");
+			image[i].attr('src', playerList[i].imgsrc);
+			healthPoints[i] = $("<h4>"+playerList[i].hp+"<h4>");
+			healthPoints[i].attr('id',playerList[i].value);
+			/*--Appending playername, playerimage and player healpoints --*/
+			playerBtn[i].append(playerName[i]).append(image[i]).append(healthPoints[i]);
+			/*--Appending the players to the mainSection div--*/
+			$("#mainSection").append(playerBtn[i]);
+		}
+	}
+	/*--The on-click events function--*/
+	var callOnClickEvents = function(){
+		$("#button-1").on("click", function(){
 		/*--If button1 is the player, add the rest of buttons 
 		to enemies available --*/
 		if(player){
@@ -36,7 +93,7 @@ $(document).ready(function(){
 			$("#display").html("");
 		}
 	});
-	$("#button-2").on("click", function(){
+		$("#button-2").on("click", function(){
 		/*--If button2 is the player, add the rest of buttons 
 		to enemies available --*/
 		if(player){
@@ -54,7 +111,7 @@ $(document).ready(function(){
 			$("#display").html("");
 		}
 	});
-	$("#button-3").on("click", function(){
+		$("#button-3").on("click", function(){
 		/*--If button3 is the player, add the rest of buttons 
 		to enemies available --*/
 		if(player){
@@ -72,7 +129,7 @@ $(document).ready(function(){
 			$("#display").html("");
 		}
 	});
-	$("#button-4").on("click", function(){
+		$("#button-4").on("click", function(){
 		/*--If button4 is the player, add the rest of buttons 
 		to enemies available --*/
 		if(player){
@@ -90,8 +147,28 @@ $(document).ready(function(){
 			$("#display").html("");
 		}
 	});
-	/*--When attack button clicked,you and the enemy 
-		chosen would fight--*/
+	}
+	/*--Initialize function --*/
+	var callInitialize =function(){
+		/*--createPlayers function called--*/
+		createPlayers();
+		player = true;
+		defender = true;
+		you="";
+		enemy = "";
+		enemy_count = 3;
+		$("#button-restart").hide();
+		$("#button-attack").attr("disabled",true);
+		$("#yourCharacter").html("");
+		$("#defender").html("");
+		$("#display").html("");
+		/*--on-click events function called--*/
+		callOnClickEvents();
+	}
+	/*--call the initialize function--*/
+	callInitialize();
+	/*--When attack button clicked,your character and the enemy 
+	chosen would fight--*/
 	$("#button-attack").on("click", function(){
 		var enemy_cap = parseInt(enemy.attr("cap"));
 		var enemy_hp = parseInt(enemy.attr("hp"));
@@ -114,14 +191,14 @@ $(document).ready(function(){
 		$("#"+you.attr("value")).text(you_hp);
 		$("#"+enemy.attr("value")).text(enemy_hp);
 		/*--If your health point less than or equal to zero, you
-			loose the game. --*/
+		loose the game. --*/
 		if(you_hp <= 0){
 			$("#display").html("<br><br>You lost the game!. Please restart<br><br>");
 			$("#button-attack").attr("disabled",true);
 			$("#button-restart").show();
 		}
 		/*--If enemy's health point less than or equal to zero, you
-			defeat the enemy. --*/
+		defeat the enemy. --*/
 		else if(enemy_hp <= 0){
 			$("#defender").html("");
 			$("#display").html("<br><br>You defeated the enemy!!");
@@ -139,8 +216,9 @@ $(document).ready(function(){
 			$("#button-attack").attr("disabled",true);
 		}
 	});
-	/*--Reload the page on pressing restart --*/
+	/*-- callInitialize invoked for restarting --*/
 	$("#button-restart").on("click", function(){
-		location.reload();
+		callInitialize();
 	});
 });
+

@@ -23,6 +23,15 @@ h3{
 	color: black;
 	text-align: center;
 }
+button img{
+	width: 100px;
+	height: 100px;
+}
+#button-1, #button-2, #button-3, #button-4{
+	width: 160px;
+	height: 200px;
+}
+
 #yourCharacter button{
 	background-color: green; 
 }
